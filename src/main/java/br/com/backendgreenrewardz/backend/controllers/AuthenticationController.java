@@ -60,15 +60,8 @@ public class AuthenticationController {
 
         this.repository.save(newUser);
 
-        // Constrói o URI para o recurso de usuário criado, usando o login do usuário.
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentRequest() // Captura a URI da requisição atual
-                .path("/{login}") // Adiciona o login do usuário ao path
-                .buildAndExpand(newUser.getLogin()) // Substitui {login} pelo login do usuário
-                .toUri();
-
         // Retorna uma resposta HTTP 201 Created com a localização do novo recurso no header 'Location'.
-        return ResponseEntity.created(location).build();
+        return ResponseEntity.ok().build();
     }
 }
 
