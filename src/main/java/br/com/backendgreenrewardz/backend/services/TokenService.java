@@ -1,4 +1,4 @@
-package br.com.backendgreenrewardz.backend.infra.security;
+package br.com.backendgreenrewardz.backend.services;
 
 import br.com.backendgreenrewardz.backend.domain.user.User;
 import com.auth0.jwt.JWT;

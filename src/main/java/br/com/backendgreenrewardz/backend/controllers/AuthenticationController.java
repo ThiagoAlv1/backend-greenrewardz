@@ -6,7 +6,7 @@ import br.com.backendgreenrewardz.backend.domain.user.AuthenticationDTO;
 import br.com.backendgreenrewardz.backend.domain.user.LoginResponseDTO;
 import br.com.backendgreenrewardz.backend.domain.user.RegisterDTO;
 import br.com.backendgreenrewardz.backend.domain.user.User;
-import br.com.backendgreenrewardz.backend.infra.security.TokenService;
+import br.com.backendgreenrewardz.backend.services.TokenService;
 import br.com.backendgreenrewardz.backend.repositories.UserRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +16,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
-
-import java.net.URI;
 
 // Define a classe como um controlador REST, permitindo que ela lide com requisições HTTP.
 @CrossOrigin(origins = "*")

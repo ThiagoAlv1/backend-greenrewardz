@@ -1,7 +1,7 @@
 package br.com.backendgreenrewardz.backend.infra.security.configurations;
 
 
-import br.com.backendgreenrewardz.backend.infra.security.TokenService;
+import br.com.backendgreenrewardz.backend.services.TokenService;
 import br.com.backendgreenrewardz.backend.repositories.UserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
