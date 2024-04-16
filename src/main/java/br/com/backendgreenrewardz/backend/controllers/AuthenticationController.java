@@ -17,6 +17,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 
@@ -50,9 +51,9 @@ public class AuthenticationController {
     // Método para tratar POST requests no caminho "/auth/register", para registrar novos usuários.
     @PostMapping("/register")
     @CrossOrigin(origins = "*")
-    public ResponseEntity<Object> register(@RequestBody @Valid RegisterDTO data) {
+    public ResponseEntity<String> register(@RequestBody @Valid RegisterDTO data, UriComponentsBuilder uriBuilder) {
         if (this.repository.findByLogin(data.login()) != null) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body("Usuário já existe.");
         }
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
@@ -60,10 +61,13 @@ public class AuthenticationController {
 
         this.repository.save(newUser);
 
-        var texto = "Cadastrado com sucesso!";
+        // Construindo a URI do recurso criado para incluir no cabeçalho 'Location'
+        var location = uriBuilder.path("/users/{id}")
+                .buildAndExpand(newUser.getId())
+                .toUri();
 
-        // Retorna uma resposta HTTP 201 Created com a localização do novo recurso no header 'Location'.
-        return ResponseEntity.ok(texto);
+        // Retorna uma resposta HTTP 201 Created com a localização do novo recurso no cabeçalho 'Location'
+        return ResponseEntity.created(location).body("Cadastrado com sucesso!");
     }
 }
 
