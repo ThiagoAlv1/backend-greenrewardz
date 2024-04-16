@@ -60,8 +60,10 @@ public class AuthenticationController {
 
         this.repository.save(newUser);
 
+        var texto = "Cadastrado com sucesso!";
+
         // Retorna uma resposta HTTP 201 Created com a localização do novo recurso no header 'Location'.
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(texto);
     }
 }
 
